@@ -1,0 +1,267 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>crypto3 - الدفع عبر البيتكوين</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #eee;
+    margin: 0;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  header, footer {
+    background: #1e1e1e;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    gap: 10px;
+  }
+  header {
+    justify-content: flex-start;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  footer {
+    justify-content: center;
+    font-size: 1rem;
+    color: #777;
+    margin-top: auto;
+  }
+  .bitcoin-icon {
+    width: 30px;
+    height: 30px;
+    fill: #f7931a;
+  }
+  .wallet {
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .wallet-address {
+    font-family: monospace;
+    background: #272727;
+    padding: 10px;
+    border-radius: 6px;
+    user-select: all;
+    word-break: break-all;
+    margin-bottom: 10px;
+  }
+  button.copy-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  button.copy-btn:hover {
+    background: #45a049;
+  }
+  table {
+    width: 100%;
+    max-width: 400px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  table, th, td {
+    border: 1px solid #333;
+  }
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+  th {
+    background: #222;
+  }
+  tr:nth-child(even) {
+    background: #1e1e1e;
+  }
+  .instructions {
+    max-width: 400px;
+    margin-bottom: 20px;
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+    line-height: 1.4;
+    font-size: 1rem;
+  }
+  form {
+    max-width: 400px;
+    width: 100%;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  input[type="file"] {
+    margin: 10px 0 20px;
+    cursor: pointer;
+  }
+  button.submit-btn {
+    background: #2196f3;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.submit-btn:hover {
+    background: #0b7dda;
+  }
+  .message {
+    margin-top: 15px;
+    color: #4caf50;
+    font-weight: bold;
+  }
+  /* قسم المقالات */
+  .articles-section {
+    max-width: 900px;
+    width: 100%;
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 40px;
+  }
+  .articles-section h2 {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.6rem;
+    border-bottom: 2px solid #f7931a;
+    padding-bottom: 5px;
+    color: #f7931a;
+  }
+  .article {
+    margin-bottom: 20px;
+    background: #272727;
+    padding: 15px;
+    border-radius: 6px;
+  }
+  .article h3 {
+    margin-top: 0;
+    color: #f7931a;
+  }
+  .article p {
+    line-height: 1.4;
+  }
+  .read-more {
+    color: #2196f3;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .read-more:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="bitcoin-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm2.99 22.28c-.55 1.86-2.5 2.43-4.33 2.36-2.74-.11-4.42-1.65-4.59-4.04h-2.27v-2.36h2.25c.09-.46.16-.95.16-1.44 0-.7-.15-1.21-.49-1.64-.35-.42-1-.59-1.93-.59v-2.35h2.3v-2.35h2.27v2.35h1.84v2.35h-1.82c.07.26.12.52.14.79.05.56-.04 1.05-.28 1.5-.23.44-.61.81-1.1 1.07v.03c.61.12 1.23.32 1.79.62.94.48 1.52 1.32 1.67 2.38.21 1.47-.46 2.6-1.44 3.19z"/>
+  </svg>
+  crypto3
+</header>
+
+<div class="wallet">
+  <div class="wallet-address" id="walletAddress">bc1qt8hltqlkzj904n2z39dxqzz3n3e8qqplf657lj62tvgas8f6pr2sq55j3d</div>
+  <button class="copy-btn" onclick="copyAddress()">نسخ عنوان المحفظة</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>كمية USDT</th>
+      <th>السعر الأصلي (دولار)</th>
+      <th>السعر عبر البيتكوين (دولار)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>15</td><td>15</td><td>12</td></tr>
+    <tr><td>50</td><td>50</td><td>43</td></tr>
+    <tr><td>100</td><td>100</td><td>89</td></tr>
+    <tr><td>500</td><td>500</td><td>430</td></tr>
+    <tr><td>1000</td><td>1000</td><td>850</td></tr>
+  </tbody>
+</table>
+
+<div class="instructions">
+  <p>قم بإرسال مبلغ البيتكوين على عنوان المحفظة أعلاه. يرجى الانتظار من 1 إلى 24 ساعة لتأكيد الدفع.</p>
+  <p>بعد الدفع، يرجى رفع صورة تأكيد الدفع باستخدام النموذج أدناه.</p>
+</div>
+
+<form id="paymentForm">
+  <input type="file" id="paymentProof" accept="image/*" required />
+  <br />
+  <button type="submit" class="submit-btn">رفع صورة تأكيد الدفع</button>
+  <div class="message" id="formMessage"></div>
+</form>
+
+<section class="articles-section">
+  <h2>مقالات ومعلومات عن العملات المشفرة</h2>
+  <article class="article">
+    <h3>ما هو USDT؟</h3>
+    <p>USDT أو Tether هو عملة رقمية مستقرة مرتبطة بالدولار الأمريكي، تستخدم لتحويل الأموال بسرعة وبدون تقلبات سعرية كبيرة.</p>
+    <a href="#" class="read-more">اقرأ المزيد</a>
+  </article>
+  <article class="article">
+    <h3>لماذا نستخدم العملات المشفرة؟</h3>
+    <p>توفر العملات المشفرة وسيلة دفع آمنة، لا مركزية وسريعة مع إمكانية إجراء المعاملات عبر الحدود بسهولة.</p>
+    <a href="#" class="read-more">اقرأ المزيد</a>
+  </article>
+  <article class="article">
+    <h3>نصائح لشراء العملات الرقمية بأمان</h3>
+    <p>تأكد من استخدام محافظ آمنة، تحقق من مصدر العملة، ولا تشارك مفاتيحك الخاصة مع أحد.</p>
+    <a href="#" class="read-more">اقرأ المزيد</a>
+  </article>
+</section>
+
+<footer>
+  <svg class="bitcoin-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm2.99 22.28c-.55 1.86-2.5 2.43-4.33 2.36-2.74-.11-4.42-1.65-4.59-4.04h-2.27v-2.36h2.25c.09-.46.16-.95.16-1.44 0-.7-.15-1.21-.49-1.64-.35-.42-1-.59-1.93-.59v-2.35h2.3v-2.35h2.27v2.35h1.84v2.35h-1.82c.07.26.12.52.14.79.05.56-.04 1.05-.28 1.5-.23.44-.61.81-1.1 1.07v.03c.61.12 1.23.32 1.79.62.94.48 1.52 1.32 1.67 2.38.21 1.47-.46 2.6-1.44 3.19z"/>
+  </svg>
+  crypto3 - جميع الحقوق محفوظة
+</footer>
+
+<script>
+function copyAddress() {
+  const wallet = document.getElementById('walletAddress').innerText;
+  navigator.clipboard.writeText(wallet).then(() => {
+    alert('تم نسخ عنوان المحفظة!');
+  });
+}
+
+document.getElementById('paymentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const fileInput = document.getElementById('paymentProof');
+  const messageDiv = document.getElementById('formMessage');
+
+  if (fileInput.files.length === 0) {
+    messageDiv.style.color = 'red';
+    messageDiv.textContent = 'يرجى اختيار صورة تأكيد الدفع.';
+    return;
+  }
+
+  messageDiv.style.color = '#4caf50';
+  messageDiv.textContent = 'تم رفع صورة تأكيد الدفع بنجاح. شكراً لك!';
+  fileInput.value = '';
+});
+</script>
+
+</body>
+</html>
